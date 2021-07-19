@@ -14,7 +14,9 @@ def main():
     q = 100000002499
     m = p * q
 
-    # lfg_results = []
+    lfg_results = []
+    j = 21
+    k = 34
 
     for lenght in numbers_lenght:
         bbs = BlumBlumShub(seed, lenght, m)
@@ -23,14 +25,23 @@ def main():
         exec_time = (time.process_time() - start)
         bbs_results.append({'Tempo': f"{exec_time:.20f}", 'Numero': prn })
 
-        # lfg = LaggedFibonacciGenerator()
-
-    print(bbs_results)
+        lfg = LaggedFibonacciGenerator(lenght, j, k)
+        lfg.S = lfg.generateS()
+        start = time.process_time()
+        prn = lfg.getBinaryRandomNum()
+        exec_time = (time.process_time() - start)
+        lfg_results.append({'Tempo': f"{exec_time:.20f}", 'Numero': prn})
 
     with open('BBS_Result.csv', 'w', newline='') as csv_file:
         w = csv.DictWriter(csv_file, bbs_results[0].keys())
         w.writeheader()
         w.writerows(bbs_results)
+    csv_file.close()
+
+    with open('LFG_Result.csv', 'w', newline='') as csv_file:
+        w = csv.DictWriter(csv_file, lfg_results[0].keys())
+        w.writeheader()
+        w.writerows(lfg_results)
     csv_file.close()
 
 

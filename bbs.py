@@ -10,7 +10,7 @@ class BlumBlumShub:
         self.num = seed
         self.m = m
 
-    def run(self) -> int:
+    def run(self) -> None:
         """
         Roda o algoritmo do BlumBlumShub
         x(n+1) = x(n)² mod M
@@ -18,20 +18,19 @@ class BlumBlumShub:
         """
         self.num = pow(self.num, 2, self.m) # (num^2) mod m
 
-        return self.num
 
     def getBinaryRandomNum(self):
         result = "1"
         for _ in range(self.number_lenght - 2):
-            random_number = self.run()
-            b = random_number % 2
+            self.run()
+            b = self.num % 2
             result += str(b)
         result += "1" # Força o ultimo bit em 1
         self.num = int(result, 2)
         return result
 
 """
-    Funções Auxiliares para encontrar primos (p = 3 mod 4)
+    Funções Auxiliares para encontrar numeros (p = 3 mod 4)
 """
 
 def getPrimeNumber(number_lenght) -> int:
