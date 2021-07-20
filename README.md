@@ -12,7 +12,7 @@
         - Python 3.6.9
 
 
-###Para usar os scripts:
+### Para usar os scripts:
 
 ## main.py
 Rodar os scripts 1 vez em para buscar 1 numero primo de 40 bits em cada
