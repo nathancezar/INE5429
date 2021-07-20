@@ -25,37 +25,38 @@ class MillerRabin():
 
         Fonte: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Miller%E2%80%93Rabin_test
         """
+        if num <= 3: # verifica se é 1, 2 ou 3
+            return True
 
-        continuar_for_externo = False
+        if num % 2 == 0: # verifica se é par
+            return False
+
         s = 0
         d = num-1
 
         while d % 2 == 0:
-            d / 2
+            d //= 2
             s += 1
 
         if not (pow(2,s) * d == num-1):
             print(f"Erro: Não é possivel fatorar {num}.")
-            exit(1)
+            return False
 
-        for i in range(0, self.rodadas):
-            a = randrange(2, num-2 + 1)
+        for _ in range(self.rodadas):
+            a = randrange(2, num - 2 )
             x = pow(a, d, num) # x recebe a^d mod n
 
             if x == 1 or x == num - 1: continue
 
-            for j in range(0, s-1):
+            for _ in range(s - 1):
                 x = pow(x, 2, num) # x recebe x^2 mod n
 
             if x == num-1:
-                continuar_for_externo = True
                 break
+        else:
+            return False
 
-            if continuar_for_externo: continue
-
-            return "Composto"
-
-        return "Provavel Primo"
+        return True
 
 class Fermat():
     def __init__(self, rodadas=_RODADAS) -> None:
@@ -71,11 +72,17 @@ class Fermat():
 
         Fonte: https://en.wikipedia.org/wiki/Fermat_primality_test#Algorithm
         """
-        for i in range(0, self.rodadas):
+        if num <= 3: # verifica se é 1, 2 ou 3
+            return True
+
+        if num % 2 == 0: # verifica se é par
+            return False
+
+        for _ in range(0, self.rodadas):
             a = randrange(2, num-2 + 1)
             x = pow(a,num-1, num)
 
             if x != 1:
-                return 'Composto'
+                return False
 
-        return 'Provavel Primo'
+        return True
